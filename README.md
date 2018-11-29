@@ -1,2 +1,4 @@
-# geekbrains-l7
-Test repo for geekbrains
+## Welcome, Geekbrains!
+Это тестовый *репозиторий* для выполнения домашнего задания [GeekBrains](https://geekbrains.ru).
+
+by Firebull
