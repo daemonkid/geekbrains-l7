@@ -97,14 +97,14 @@ EepromOperations EEPROM_SPI_WritePage(uint8_t* pBuffer, uint16_t WriteAddr, uint
   * @retval EepromOperations value: EEPROM_STATUS_COMPLETE or EEPROM_STATUS_ERROR
   */
 EepromOperations EEPROM_SPI_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t NumByteToWrite) {
-    uint16_t NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
+    uint16_t NumOfPage   = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
     uint16_t sEE_DataNum = 0;
 
     EepromOperations pageWriteStatus = EEPROM_STATUS_PENDING;
 
     Addr        = WriteAddr % EEPROM_PAGESIZE;
     count       = EEPROM_PAGESIZE - Addr;
-    NumOfPage   =  NumByteToWrite / EEPROM_PAGESIZE;
+    NumOfPage   = NumByteToWrite / EEPROM_PAGESIZE;
     NumOfSingle = NumByteToWrite % EEPROM_PAGESIZE;
 
     if (Addr == 0) { /* WriteAddr is EEPROM_PAGESIZE aligned  */
@@ -162,7 +162,7 @@ EepromOperations EEPROM_SPI_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, ui
             }
         } else { /* NumByteToWrite > EEPROM_PAGESIZE */
             NumByteToWrite -= count;
-            NumOfPage =  NumByteToWrite / EEPROM_PAGESIZE;
+            NumOfPage   =  NumByteToWrite / EEPROM_PAGESIZE;
             NumOfSingle = NumByteToWrite % EEPROM_PAGESIZE;
 
             sEE_DataNum = count;
