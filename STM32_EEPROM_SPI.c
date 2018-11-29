@@ -27,6 +27,7 @@ uint8_t RxBuffer[256] = {0x00};
 /**
   * @brief  Writes more than one byte to the EEPROM with a single WRITE cycle
   *         (Page WRITE sequence).
+  *
   * @note   The number of byte can't exceed the EEPROM page size.
   * @param  pBuffer: pointer to the buffer  containing the data to be written
   *         to the EEPROM.
@@ -88,6 +89,7 @@ EepromOperations EEPROM_SPI_WritePage(uint8_t* pBuffer, uint16_t WriteAddr, uint
 /**
   * @brief  Writes block of data to the EEPROM. In this function, the number of
   *         WRITE cycles are reduced, using Page WRITE sequence.
+  *
   * @param  pBuffer: pointer to the buffer  containing the data to be written
   *         to the EEPROM.
   * @param  WriteAddr: EEPROM's internal address to write to.
@@ -100,9 +102,9 @@ EepromOperations EEPROM_SPI_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, ui
 
     EepromOperations pageWriteStatus = EEPROM_STATUS_PENDING;
 
-    Addr = WriteAddr % EEPROM_PAGESIZE;
-    count = EEPROM_PAGESIZE - Addr;
-    NumOfPage =  NumByteToWrite / EEPROM_PAGESIZE;
+    Addr        = WriteAddr % EEPROM_PAGESIZE;
+    count       = EEPROM_PAGESIZE - Addr;
+    NumOfPage   =  NumByteToWrite / EEPROM_PAGESIZE;
     NumOfSingle = NumByteToWrite % EEPROM_PAGESIZE;
 
     if (Addr == 0) { /* WriteAddr is EEPROM_PAGESIZE aligned  */
@@ -204,6 +206,7 @@ EepromOperations EEPROM_SPI_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, ui
 
 /**
   * @brief  Reads a block of data from the EEPROM.
+  *
   * @param  pBuffer: pointer to the buffer that receives the data read from the EEPROM.
   * @param  ReadAddr: EEPROM's internal address to read from.
   * @param  NumByteToRead: number of bytes to read from the EEPROM.
@@ -214,9 +217,7 @@ EepromOperations EEPROM_SPI_ReadBuffer(uint8_t* pBuffer, uint16_t ReadAddr, uint
         osDelay(1);
     }
 
-    /*
-        We gonna send all commands in one packet of 3 bytes
-     */
+    /* We gonna send all commands in one packet of 3 bytes */
 
     uint8_t header[3];
 
@@ -243,6 +244,7 @@ EepromOperations EEPROM_SPI_ReadBuffer(uint8_t* pBuffer, uint16_t ReadAddr, uint
 /**
   * @brief  Sends a byte through the SPI interface and return the byte received
   *         from the SPI bus.
+  *
   * @param  byte: byte to send.
   * @retval The value of the received byte.
   */
@@ -273,6 +275,7 @@ uint8_t EEPROM_SendByte(uint8_t byte) {
 }
 /**
   * @brief  Enables the write access to the EEPROM.
+  *
   * @param  None
   * @retval None
   */
@@ -290,6 +293,7 @@ void sEE_WriteEnable(void) {
 
 /**
   * @brief  Disables the write access to the EEPROM.
+  *
   * @param  None
   * @retval None
   */
@@ -308,6 +312,7 @@ void sEE_WriteDisable(void) {
 
 /**
   * @brief  Write new value in EEPROM Status Register.
+  *
   * @param  regval : new value of register
   * @retval None
   */
@@ -337,6 +342,7 @@ void sEE_WriteStatusRegister(uint8_t regval) {
 /**
   * @brief  Polls the status of the Write In Progress (WIP) flag in the EEPROM's
   *         status register and loop until write operation has completed.
+  *
   * @param  None
   * @retval None
   */
@@ -369,6 +375,7 @@ uint8_t EEPROM_SPI_WaitStandbyState(void) {
 
 /**
  * @brief Low level function to send header data to EEPROM
+ *
  * @param instruction array of bytes to send
  * @param size        data size in bytes
  */
